@@ -371,7 +371,7 @@ bool getHexnode1ADCInput5(unsigned * inputValue)
         if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getHexnode1ADCInput5 
             && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getHexnode1ADCInput5 )
         {
-            *inputValue = (int)abyResponsePacket[2];
+            *inputValue = TWOBYTESTOINT(abyResponsePacket[3], abyResponsePacket[2]) ;
             return true;
         }
     }
@@ -387,7 +387,7 @@ bool getHexnode1ADCInput6(unsigned * inputValue)
         if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getHexnode1ADCInput6 
             && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getHexnode1ADCInput6 )
         {
-            *inputValue = (int)abyResponsePacket[2];
+            *inputValue = TWOBYTESTOINT(abyResponsePacket[3], abyResponsePacket[2]) ;
             return true;
         }
     }
