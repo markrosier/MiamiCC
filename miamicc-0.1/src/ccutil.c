@@ -414,7 +414,24 @@ char deviceName[255];
 
 char * getDevice( char * baudRate)
 {
-    int iPort=0;
+#ifndef WIN32
+    int iPort=1;
+    while (iPort<4)
+    {
+        sprintf(deviceName,"/dev/ttymxc%d",iPort);
+        if (openPort(deviceName, baudRate) == true)
+        {
+//            if (checkPNPString()==true)
+            {
+                closePort();
+                return deviceName;
+            }
+        }
+        closePort();
+        iPort++;
+    }
+#endif
+    iPort=0;
     while (iPort<100)
     {
 #ifndef WIN32

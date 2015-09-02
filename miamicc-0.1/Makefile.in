@@ -108,12 +108,12 @@ DIST_COMMON = INSTALL NEWS README AUTHORS ChangeLog \
 	$(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
 	$(srcdir)/config.in $(top_srcdir)/build-aux/mkinstalldirs \
-	ABOUT-NLS COPYING compile build-aux/compile config.guess \
-	build-aux/config.guess config.rpath build-aux/config.rpath \
-	config.sub build-aux/config.sub depcomp build-aux/depcomp \
-	install-sh build-aux/install-sh build-aux/mdate-sh missing \
-	build-aux/missing build-aux/mkinstalldirs \
-	build-aux/texinfo.tex $(top_srcdir)/build-aux/compile \
+	ABOUT-NLS COPYING build-aux/compile build-aux/config.guess \
+	build-aux/config.rpath build-aux/config.sub depcomp \
+	build-aux/depcomp install-sh build-aux/install-sh \
+	build-aux/mdate-sh missing build-aux/missing \
+	build-aux/mkinstalldirs build-aux/texinfo.tex \
+	$(top_srcdir)/build-aux/compile \
 	$(top_srcdir)/build-aux/config.guess \
 	$(top_srcdir)/build-aux/config.rpath \
 	$(top_srcdir)/build-aux/config.sub \

@@ -14,9 +14,7 @@
 // --------------
 
 #ifndef BAUD_19200
-#define BAUDRATE                        115200
-#else
-#define BAUDRATE                        19200
+#define BAUDRATE    19200
 #endif
 
 // ---
@@ -25,17 +23,17 @@
 #define MAX_PACKET_SIZE                 14
 #define MAX_EXTENDED_PACKET_SIZE        256
 #define MAX_DDAPI_PACKET_SIZE           11
-#define MAX_PTCM_PACKET_SIZE						14
-#define PAL_BYTE												0x00
-#define OPCODE_BYTE											0x01
+#define MAX_PTCM_PACKET_SIZE            14
+#define PAL_BYTE			0x00
+#define OPCODE_BYTE			0x01
 #define EXTENDED_PACKET_LENGTH_BYTE     0x02
-#define PACKET_TIMEOUT 									1000
+#define PACKET_TIMEOUT                  1000
 
 // ---
 // Packet Source
 // ---
-#define PTCM_PACKET_ID 									0x50
-#define DDAPI_PACKET_ID 								0xA0
+#define PTCM_PACKET_ID 			0x50
+#define DDAPI_PACKET_ID 		0xA0
 
 #define EXTENDED_PACKET_ID              0x00
 
@@ -64,14 +62,19 @@
 #define DDAPI_PAL_conditionalChangeNAD                DDAPI_PACKET_ID + 0x08
 #define DDAPI_PAL_dataDump                            DDAPI_PACKET_ID + 0x08
 #define DDAPI_PAL_saveConfiguration                   DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_setSpaceHeaterEnable                DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setSpaceHeaterMode                  DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_getSpaceHeaterBurnerStatus          DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getSpaceHeaterErrorStatus           DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_setSpaceHeaterPowerLED              DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_getSpaceHeaterErrorCode             DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_setWaterHeaterEnable                DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setWaterHeaterMode                  DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_getWaterHeaterBurnerStatus          DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getWaterHeaterErrorStatus           DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_setWaterHeaterPowerLED              DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_getWaterHeaterErrorStatus           DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_setLIN100PDUEnable                  DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setPDUPowerSource                   DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_getIgnitionSignal                   DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_get230VPresentSignal                DDAPI_PACKET_ID + 0x02
@@ -88,6 +91,7 @@
 #define DDAPI_PAL_getNegativeInput1                   DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getADCInput1                        DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getADCInput2                        DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_setHexnode1Enable                   DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setHexnode1Output1                  DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setHexnode1Output2                  DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setHexnode1Output3                  DDAPI_PACKET_ID + 0x03
@@ -101,6 +105,7 @@
 #define DDAPI_PAL_getHexnode1Input4                   DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getHexnode1ADCInput5                DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getHexnode1ADCInput6                DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_setHexnode2Enable                   DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setHexnode2Output1                  DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setHexnode2Output2                  DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setHexnode2Output3                  DDAPI_PACKET_ID + 0x03
@@ -114,6 +119,7 @@
 #define DDAPI_PAL_getHexnode2Input4                   DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getHexnode2ADCInput5                DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getHexnode2ADCInput6                DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_setHexnode3Enable                   DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setHexnode3Output1                  DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setHexnode3Output2                  DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setHexnode3Output3                  DDAPI_PACKET_ID + 0x03
@@ -127,6 +133,7 @@
 #define DDAPI_PAL_getHexnode3Input4                   DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getHexnode3ADCInput5                DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getHexnode3ADCInput6                DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_setHexnode4Enable                   DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setHexnode4Output1                  DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setHexnode4Output2                  DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setHexnode4Output3                  DDAPI_PACKET_ID + 0x03
@@ -140,6 +147,26 @@
 #define DDAPI_PAL_getHexnode4Input4                   DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getHexnode4ADCInput5                DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getHexnode4ADCInput6                DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_setLIN50PDUMk2Enable                DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_setLIN50PDUMk2PowerSource           DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_setLIN50PDUMk2Master                DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_setLIN50PDUMk2Lights                DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_setLIN50PDUMk2Awning                DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_setLIN50PDUMk2PumpMode              DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_getLIN50PDUMk2Current               DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_getLIN50PDUMk2FuseDiagnostics       DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_getLIN50PDUMk2Voltmeter             DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_getLIN50PDUMk2WaterLevel            DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_getLIN50PDUMk2Temperature           DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_getLIN50PDUMk2MainsSignal           DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDUMk2IgnitionSignal        DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDUMk2PumpFeedback          DDAPI_PACKET_ID + 0x02
+
+
+
+
+
+
 
 // ---
 // DDAPI Opcodes (2nd Byte of Packet)
@@ -158,12 +185,16 @@
 #define DDAPI_OPCODE_getSpaceHeaterBurnerStatus       0x11
 #define DDAPI_OPCODE_getSpaceHeaterErrorStatus        0x12
 #define DDAPI_OPCODE_setSpaceHeaterPowerLED           0x13
+#define DDAPI_OPCODE_getSpaceHeaterErrorCode	      0x14
+#define DDAPI_OPCODE_setSpaceHeaterEnable             0x15
 #define DDAPI_OPCODE_setWaterHeaterMode               0x20
 #define DDAPI_OPCODE_getWaterHeaterBurnerStatus	      0x21
 #define DDAPI_OPCODE_getWaterHeaterErrorStatus	      0x22
 #define DDAPI_OPCODE_setWaterHeaterPowerLED           0x23
+#define DDAPI_OPCODE_getWaterHeaterErrorCode	      0x24
+#define DDAPI_OPCODE_setWaterHeaterEnable             0x25
 #define DDAPI_OPCODE_setPDUPowerSource                0x30
-#define DDAPI_OPCODE_getIgnitionSignal              	0x31
+#define DDAPI_OPCODE_getIgnitionSignal                0x31
 #define DDAPI_OPCODE_get230VPresentSignal             0x32
 #define DDAPI_OPCODE_getLeisureBatteryVoltage         0x33
 #define DDAPI_OPCODE_getVehicleBatteryVoltage         0x34
@@ -178,6 +209,7 @@
 #define DDAPI_OPCODE_getNegativeInput1                0x3d
 #define DDAPI_OPCODE_getADCInput1                     0x3e
 #define DDAPI_OPCODE_getADCInput2                     0x3f
+#define DDAPI_OPCODE_setLIN100PDUEnable               0x2f
 #define DDAPI_OPCODE_setHexnode1Output1               0x40
 #define DDAPI_OPCODE_setHexnode1Output2               0x41
 #define DDAPI_OPCODE_setHexnode1Output3               0x42
@@ -191,45 +223,65 @@
 #define DDAPI_OPCODE_getHexnode1Input4                0x4a
 #define DDAPI_OPCODE_getHexnode1ADCInput5             0x4b
 #define DDAPI_OPCODE_getHexnode1ADCInput6             0x4c
-#define DDAPI_OPCODE_setHexnode2Output1               0x60
-#define DDAPI_OPCODE_setHexnode2Output2               0x61
-#define DDAPI_OPCODE_setHexnode2Output3               0x62
-#define DDAPI_OPCODE_setHexnode2Output4               0x63
-#define DDAPI_OPCODE_setHexnode2Output5               0x64
-#define DDAPI_OPCODE_setHexnode2Output6               0x65
-#define DDAPI_OPCODE_getHexnode2OutputOverloadStatus  0x66
-#define DDAPI_OPCODE_getHexnode2Input1                0x67
-#define DDAPI_OPCODE_getHexnode2Input2                0x68
-#define DDAPI_OPCODE_getHexnode2Input3                0x69
-#define DDAPI_OPCODE_getHexnode2Input4                0x6a
-#define DDAPI_OPCODE_getHexnode2ADCInput5             0x6b
-#define DDAPI_OPCODE_getHexnode2ADCInput6             0x6c
-#define DDAPI_OPCODE_setHexnode3Output1               0x80
-#define DDAPI_OPCODE_setHexnode3Output2               0x81
-#define DDAPI_OPCODE_setHexnode3Output3               0x82
-#define DDAPI_OPCODE_setHexnode3Output4               0x83
-#define DDAPI_OPCODE_setHexnode3Output5               0x84
-#define DDAPI_OPCODE_setHexnode3Output6               0x85
-#define DDAPI_OPCODE_getHexnode3OutputOverloadStatus  0x86
-#define DDAPI_OPCODE_getHexnode3Input1                0x87
-#define DDAPI_OPCODE_getHexnode3Input2                0x88
-#define DDAPI_OPCODE_getHexnode3Input3                0x89
-#define DDAPI_OPCODE_getHexnode3Input4                0x8a
-#define DDAPI_OPCODE_getHexnode3ADCInput5             0x8b
-#define DDAPI_OPCODE_getHexnode3ADCInput6             0x8c
-#define DDAPI_OPCODE_setHexnode4Output1               0xa0
-#define DDAPI_OPCODE_setHexnode4Output2               0xa1
-#define DDAPI_OPCODE_setHexnode4Output3               0xa2
-#define DDAPI_OPCODE_setHexnode4Output4               0xa3
-#define DDAPI_OPCODE_setHexnode4Output5               0xa4
-#define DDAPI_OPCODE_setHexnode4Output6               0xa5
-#define DDAPI_OPCODE_getHexnode4OutputOverloadStatus  0xa6
-#define DDAPI_OPCODE_getHexnode4Input1                0xa7
-#define DDAPI_OPCODE_getHexnode4Input2                0xa8
-#define DDAPI_OPCODE_getHexnode4Input3                0xa9
-#define DDAPI_OPCODE_getHexnode4Input4                0xaa
-#define DDAPI_OPCODE_getHexnode4ADCInput5             0xab
-#define DDAPI_OPCODE_getHexnode4ADCInput6             0xac
+#define DDAPI_OPCODE_setHexnode1Enable                0x4d
+#define DDAPI_OPCODE_setHexnode2Output1               0x50
+#define DDAPI_OPCODE_setHexnode2Output2               0x51
+#define DDAPI_OPCODE_setHexnode2Output3               0x52
+#define DDAPI_OPCODE_setHexnode2Output4               0x53
+#define DDAPI_OPCODE_setHexnode2Output5               0x54
+#define DDAPI_OPCODE_setHexnode2Output6               0x55
+#define DDAPI_OPCODE_getHexnode2OutputOverloadStatus  0x56
+#define DDAPI_OPCODE_getHexnode2Input1                0x57
+#define DDAPI_OPCODE_getHexnode2Input2                0x58
+#define DDAPI_OPCODE_getHexnode2Input3                0x59
+#define DDAPI_OPCODE_getHexnode2Input4                0x5a
+#define DDAPI_OPCODE_getHexnode2ADCInput5             0x5b
+#define DDAPI_OPCODE_getHexnode2ADCInput6             0x5c
+#define DDAPI_OPCODE_setHexnode2Enable                0x5d
+#define DDAPI_OPCODE_setHexnode3Output1               0x60
+#define DDAPI_OPCODE_setHexnode3Output2               0x61
+#define DDAPI_OPCODE_setHexnode3Output3               0x62
+#define DDAPI_OPCODE_setHexnode3Output4               0x63
+#define DDAPI_OPCODE_setHexnode3Output5               0x64
+#define DDAPI_OPCODE_setHexnode3Output6               0x65
+#define DDAPI_OPCODE_getHexnode3OutputOverloadStatus  0x66
+#define DDAPI_OPCODE_getHexnode3Input1                0x67
+#define DDAPI_OPCODE_getHexnode3Input2                0x68
+#define DDAPI_OPCODE_getHexnode3Input3                0x69
+#define DDAPI_OPCODE_getHexnode3Input4                0x6a
+#define DDAPI_OPCODE_getHexnode3ADCInput5             0x6b
+#define DDAPI_OPCODE_getHexnode3ADCInput6             0x6c
+#define DDAPI_OPCODE_setHexnode3Enable                0x6d
+#define DDAPI_OPCODE_setHexnode4Output1               0x70
+#define DDAPI_OPCODE_setHexnode4Output2               0x71
+#define DDAPI_OPCODE_setHexnode4Output3               0x72
+#define DDAPI_OPCODE_setHexnode4Output4               0x73
+#define DDAPI_OPCODE_setHexnode4Output5               0x74
+#define DDAPI_OPCODE_setHexnode4Output6               0x75
+#define DDAPI_OPCODE_getHexnode4OutputOverloadStatus  0x76
+#define DDAPI_OPCODE_getHexnode4Input1                0x77
+#define DDAPI_OPCODE_getHexnode4Input2                0x78
+#define DDAPI_OPCODE_getHexnode4Input3                0x79
+#define DDAPI_OPCODE_getHexnode4Input4                0x7a
+#define DDAPI_OPCODE_getHexnode4ADCInput5             0x7b
+#define DDAPI_OPCODE_getHexnode4ADCInput6             0x7c
+#define DDAPI_OPCODE_setHexnode4Enable                0x7d
+#define DDAPI_OPCODE_setLIN50PDUMk2PowerSource        0x80
+#define DDAPI_OPCODE_setLIN50PDUMk2Master             0x81
+#define DDAPI_OPCODE_setLIN50PDUMk2Lights             0x82
+#define DDAPI_OPCODE_setLIN50PDUMk2Awning             0x83
+#define DDAPI_OPCODE_setLIN50PDUMk2PumpMode           0x84
+#define DDAPI_OPCODE_getLIN50PDUMk2Current            0x85
+#define DDAPI_OPCODE_getLIN50PDUMk2FuseDiagnostics    0x86
+#define DDAPI_OPCODE_getLIN50PDUMk2Voltmeter          0x87
+#define DDAPI_OPCODE_getLIN50PDUMk2WaterLevel         0x88
+#define DDAPI_OPCODE_getLIN50PDUMk2Temperature        0x89
+#define DDAPI_OPCODE_getLIN50PDUMk2MainsSignal        0x8a
+#define DDAPI_OPCODE_getLIN50PDUMk2IgnitionSignal     0x8b
+#define DDAPI_OPCODE_getLIN50PDUMk2PumpFeedback       0x8c
+#define DDAPI_OPCODE_setLIN50PDUMk2Enable             0x8d
+
+
 
 
 // ---
@@ -248,8 +300,10 @@
 #define dataDump_PACKET_LENGTH                             0x08
 #define getSpaceHeaterBurnerStatus_PACKET_LENGTH           0x03
 #define getSpaceHeaterErrorStatus_PACKET_LENGTH            0x03
+#define getSpaceHeaterErrorCode_PACKET_LENGTH              0x03
 #define getWaterHeaterBurnerStatus_PACKET_LENGTH           0x03
 #define getWaterHeaterErrorStatus_PACKET_LENGTH            0x03
+#define getWaterHeaterErrorCode_PACKET_LENGTH              0x03
 #define getIgnitionSignal_PACKET_LENGTH                    0x03
 #define get230VPresentSignal_PACKET_LENGTH                 0x03
 #define getLeisureBatteryVoltage_PACKET_LENGTH             0x03
@@ -289,6 +343,14 @@
 #define getHexnode4Input4_PACKET_LENGTH                    0x03
 #define getHexnode4ADCInput5_PACKET_LENGTH                 0x04
 #define getHexnode4ADCInput6_PACKET_LENGTH                 0x04
+#define getLIN50PDUMk2Current_PACKET_LENGTH                0x05
+#define getLIN50PDUMk2FuseDiagnostics_PACKET_LENGTH        0x05
+#define getLIN50PDUMk2Voltmeter_PACKET_LENGTH              0x05
+#define getLIN50PDUMk2WaterLevel_PACKET_LENGTH             0x05
+#define getLIN50PDUMk2Temperature_PACKET_LENGTH            0x04
+#define getLIN50PDUMk2MainsSignal_PACKET_LENGTH            0x03
+#define getLIN50PDUMk2IgnitionSignal_PACKET_LENGTH         0x03
+#define getLIN50PDUMk2PumpFeedback_PACKET_LENGTH           0x03
 
 
 
@@ -306,8 +368,10 @@
 #define PTCM_PAL_dataDump                             PTCM_PACKET_ID + dataDump_PACKET_LENGTH
 #define PTCM_PAL_getSpaceHeaterBurnerStatus           PTCM_PACKET_ID + getSpaceHeaterBurnerStatus_PACKET_LENGTH
 #define PTCM_PAL_getSpaceHeaterErrorStatus            PTCM_PACKET_ID + getSpaceHeaterErrorStatus_PACKET_LENGTH
+#define PTCM_PAL_getSpaceHeaterErrorCode              PTCM_PACKET_ID + getSpaceHeaterErrorCode_PACKET_LENGTH
 #define PTCM_PAL_getWaterHeaterBurnerStatus           PTCM_PACKET_ID + getWaterHeaterBurnerStatus_PACKET_LENGTH
 #define PTCM_PAL_getWaterHeaterErrorStatus            PTCM_PACKET_ID + getWaterHeaterErrorStatus_PACKET_LENGTH
+#define PTCM_PAL_getWaterHeaterErrorCode              PTCM_PACKET_ID + getWaterHeaterErrorCode_PACKET_LENGTH
 #define PTCM_PAL_getIgnitionSignal                    PTCM_PACKET_ID + getIgnitionSignal_PACKET_LENGTH
 #define PTCM_PAL_get230VPresentSignal                 PTCM_PACKET_ID + get230VPresentSignal_PACKET_LENGTH
 #define PTCM_PAL_getLeisureBatteryVoltage             PTCM_PACKET_ID + getLeisureBatteryVoltage_PACKET_LENGTH
@@ -347,12 +411,20 @@
 #define PTCM_PAL_getHexnode4Input4                    PTCM_PACKET_ID + getHexnode4Input4_PACKET_LENGTH
 #define PTCM_PAL_getHexnode4ADCInput5                 PTCM_PACKET_ID + getHexnode4ADCInput5_PACKET_LENGTH
 #define PTCM_PAL_getHexnode4ADCInput6                 PTCM_PACKET_ID + getHexnode4ADCInput6_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUMk2Current                PTCM_PACKET_ID + getLIN50PDUMk2Current_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUMk2FuseDiagnostics        PTCM_PACKET_ID + getLIN50PDUMk2FuseDiagnostics_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUMk2Voltmeter              PTCM_PACKET_ID + getLIN50PDUMk2Voltmeter_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUMk2WaterLevel             PTCM_PACKET_ID + getLIN50PDUMk2WaterLevel_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUMk2Temperature            PTCM_PACKET_ID + getLIN50PDUMk2Temperature_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUMk2MainsSignal            PTCM_PACKET_ID + getLIN50PDUMk2MainsSignal_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUMk2IgnitionSignal         PTCM_PACKET_ID + getLIN50PDUMk2IgnitionSignal_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUMk2PumpFeedback           PTCM_PACKET_ID + getLIN50PDUMk2PumpFeedback_PACKET_LENGTH
 
 // ---
 // PTCM RETCODES defines the function it is responding to (2nd Byte of Packet)
 // ---
-#define PTCM_RETCODE_ACK                              0xfe
-#define PTCM_RETCODE_NAK                              0xff
+#define PTCM_RETCODE_ACK                              0x05
+#define PTCM_RETCODE_NAK                              0x06
 
 #define PTCM_RETCODE_active                           0x00
 #define PTCM_RETCODE_getCodeVersion                   0x01
@@ -361,8 +433,10 @@
 #define PTCM_RETCODE_dataDump                         0x08
 #define PTCM_RETCODE_getSpaceHeaterBurnerStatus       0x11
 #define PTCM_RETCODE_getSpaceHeaterErrorStatus        0x12
+#define PTCM_RETCODE_getSpaceHeaterErrorCode          0x14
 #define PTCM_RETCODE_getWaterHeaterBurnerStatus       0x22
 #define PTCM_RETCODE_getWaterHeaterErrorStatus        0x23
+#define PTCM_RETCODE_getWaterHeaterErrorCode          0x24
 #define PTCM_RETCODE_getIgnitionSignal                0x31
 #define PTCM_RETCODE_get230VPresentSignal             0x32
 #define PTCM_RETCODE_getLeisureBatteryVoltage         0x33
@@ -381,26 +455,34 @@
 #define PTCM_RETCODE_getHexnode1Input4                0x4a
 #define PTCM_RETCODE_getHexnode1ADCInput5             0x4b
 #define PTCM_RETCODE_getHexnode1ADCInput6             0x4c
-#define PTCM_RETCODE_getHexnode2OutputOverloadStatus  0x66
-#define PTCM_RETCODE_getHexnode2Input1                0x67
-#define PTCM_RETCODE_getHexnode2Input2                0x68
-#define PTCM_RETCODE_getHexnode2Input3                0x69
-#define PTCM_RETCODE_getHexnode2Input4                0x6a
-#define PTCM_RETCODE_getHexnode2ADCInput5             0x6b
-#define PTCM_RETCODE_getHexnode2ADCInput6             0x6c
-#define PTCM_RETCODE_getHexnode3OutputOverloadStatus  0x86
-#define PTCM_RETCODE_getHexnode3Input1                0x87
-#define PTCM_RETCODE_getHexnode3Input2                0x88
-#define PTCM_RETCODE_getHexnode3Input3                0x89
-#define PTCM_RETCODE_getHexnode3Input4                0x8a
-#define PTCM_RETCODE_getHexnode3ADCInput5             0x8b
-#define PTCM_RETCODE_getHexnode3ADCInput6             0x8c
-#define PTCM_RETCODE_getHexnode4OutputOverloadStatus  0xa6
-#define PTCM_RETCODE_getHexnode4Input1                0xa7
-#define PTCM_RETCODE_getHexnode4Input2                0xa8
-#define PTCM_RETCODE_getHexnode4Input3                0xa9
-#define PTCM_RETCODE_getHexnode4Input4                0xaa
-#define PTCM_RETCODE_getHexnode4ADCInput5             0xab
-#define PTCM_RETCODE_getHexnode4ADCInput6             0xac
+#define PTCM_RETCODE_getHexnode2OutputOverloadStatus  0x56
+#define PTCM_RETCODE_getHexnode2Input1                0x57
+#define PTCM_RETCODE_getHexnode2Input2                0x58
+#define PTCM_RETCODE_getHexnode2Input3                0x59
+#define PTCM_RETCODE_getHexnode2Input4                0x5a
+#define PTCM_RETCODE_getHexnode2ADCInput5             0x5b
+#define PTCM_RETCODE_getHexnode2ADCInput6             0x5c
+#define PTCM_RETCODE_getHexnode3OutputOverloadStatus  0x66
+#define PTCM_RETCODE_getHexnode3Input1                0x67
+#define PTCM_RETCODE_getHexnode3Input2                0x68
+#define PTCM_RETCODE_getHexnode3Input3                0x69
+#define PTCM_RETCODE_getHexnode3Input4                0x6a
+#define PTCM_RETCODE_getHexnode3ADCInput5             0x6b
+#define PTCM_RETCODE_getHexnode3ADCInput6             0x6c
+#define PTCM_RETCODE_getHexnode4OutputOverloadStatus  0x76
+#define PTCM_RETCODE_getHexnode4Input1                0x77
+#define PTCM_RETCODE_getHexnode4Input2                0x78
+#define PTCM_RETCODE_getHexnode4Input3                0x79
+#define PTCM_RETCODE_getHexnode4Input4                0x7a
+#define PTCM_RETCODE_getHexnode4ADCInput5             0x7b
+#define PTCM_RETCODE_getHexnode4ADCInput6             0x7c
+#define PTCM_RETCODE_getLIN50PDUMk2Current            0x85
+#define PTCM_RETCODE_getLIN50PDUMk2FuseDiagnostics    0x86
+#define PTCM_RETCODE_getLIN50PDUMk2Voltmeter          0x87
+#define PTCM_RETCODE_getLIN50PDUMk2WaterLevel         0x88
+#define PTCM_RETCODE_getLIN50PDUMk2Temperature        0x89
+#define PTCM_RETCODE_getLIN50PDUMk2MainsSignal        0x8a
+#define PTCM_RETCODE_getLIN50PDUMk2IgnitionSignal     0x8b
+#define PTCM_RETCODE_getLIN50PDUMk2PumpFeedback       0x8c
 
 #endif
