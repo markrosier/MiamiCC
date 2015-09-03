@@ -73,7 +73,7 @@
 #define DDAPI_PAL_getWaterHeaterBurnerStatus          DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getWaterHeaterErrorStatus           DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_setWaterHeaterPowerLED              DDAPI_PACKET_ID + 0x03
-#define DDAPI_PAL_getWaterHeaterErrorStatus           DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getWaterHeaterErrorCode             DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_setLIN100PDUEnable                  DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setPDUPowerSource                   DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_getIgnitionSignal                   DDAPI_PACKET_ID + 0x02
