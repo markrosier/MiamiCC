@@ -239,7 +239,7 @@ bool get230VPresentSignal(BYTE * _230VPresentSignal)
     return false;
 }
 
-bool getLeisureBatteryVoltage(unsigned * leisureBatteryVoltage)
+bool getLeisureBatteryVoltage(BYTE * leisureBatteryVoltage)
 {
    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLeisureBatteryVoltage;
     abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLeisureBatteryVoltage;
@@ -248,7 +248,7 @@ bool getLeisureBatteryVoltage(unsigned * leisureBatteryVoltage)
         if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLeisureBatteryVoltage 
             && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLeisureBatteryVoltage )
         {
-            *leisureBatteryVoltage = TWOBYTESTOINT(abyResponsePacket[3], abyResponsePacket[2]) ;
+            *leisureBatteryVoltage = (BYTE) abyResponsePacket[2] ;
             return true;
         }
     }

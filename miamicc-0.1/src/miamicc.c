@@ -105,7 +105,7 @@ static dwSet_t functionList[] =
             { "setPDUPowerSource", &setPDUPowerSource, boolFunctionByteType, "set PDU Power Source", NULL, "Usage: --setPDUPowerSource=0 Leisure 1, Vehicle, 2 = Both"},
             { "getIgnitionSignal", &getIgnitionSignal, boolFunctionPByteType, "Get Ignition Signal", "Ignition signal", ""},
             { "get230VPresentSignal", &get230VPresentSignal, boolFunctionPByteType, "Get 230V Present Signal", "230V Present signal", ""},
-            { "getLeisureBatteryVoltage", &getLeisureBatteryVoltage, boolFunctionPIntType, "Get voltage of the Leisure Battery", "Leisure Battery Voltage", ""},
+            { "getLeisureBatteryVoltage", &getLeisureBatteryVoltage, boolFunctionPByteType, "Get voltage of the Leisure Battery", "Leisure Battery Voltage", ""},
             { "getVehicleBatteryVoltage", &getVehicleBatteryVoltage, boolFunctionPIntType, "Get voltage of the Vehicle Battery", "Vehicle Battery Voltage", ""},
             { "getLoadCurrent", &getLoadCurrent, boolFunctionPIntType, "Get then Load Current", "Load Current", ""},
             { "setFridgetoSystemRelay", &setFridgetoSystemRelay, boolFunctionByteType, "set Fridge to System Relay", NULL, "Usage: --setFridgetoSystemRelay=0 is Off, 1 = On"},

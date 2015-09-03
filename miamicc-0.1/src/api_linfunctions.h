@@ -38,7 +38,7 @@ bool setLIN100PDUEnable( BYTE LIN100PDUEnable );
 bool setPDUPowerSource ( BYTE PDUPowerSource );
 bool getIgnitionSignal ( BYTE * ignitionSignal);
 bool get230VPresentSignal ( BYTE * _230VPresentSignal );
-bool getLeisureBatteryVoltage ( unsigned * leisureBatteryVoltage );
+bool getLeisureBatteryVoltage ( BYTE * leisureBatteryVoltage );
 bool getVehicleBatteryVoltage ( unsigned * vehicleBatteryVoltage );
 bool getLoadCurrent ( unsigned * loadCurrent );
 bool setFridgetoSystemRelay ( BYTE fridgetoSystemRelay );
