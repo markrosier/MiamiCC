@@ -17,7 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 bin_PROGRAMS = miamicc
-miamicc_SOURCES = api_linfunctions.h  ccutil.c  ccutil.h  general.c  general.h  miamicc.c  interfacecodes.h  linfunctions.c system.h  version.h
+miamicc_SOURCES = api_linfunctions.h  ccutil.c  ccutil.h  general.c  general.h  miamicc.c  interfacecodes.h  linfunctions.c system.h  version.h cmd-handler.c
 
 localedir = $(datadir)/locale
 

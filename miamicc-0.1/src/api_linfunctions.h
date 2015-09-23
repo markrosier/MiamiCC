@@ -14,6 +14,24 @@ extern "C"
 #endif
 
 #include "system.h"
+    
+// Common Structures    
+    
+struct command {
+    int  commandID;
+    int  param;
+    unsigned  msRepeatTime;
+    bool checkReturnValue;
+    BYTE toggleMode;
+    BYTE comparisonType;
+    int  value1;
+    int  value2;
+// internal variables
+    unsigned msTimeLeft;
+    unsigned msToggleTimeLeft;
+    BYTE currentToggleValue;
+    struct command * nextCommand;
+};    
 
 bool getLINProductID( BYTE NAD, BYTE * returnString );
 bool getLINProductSN( BYTE NAD, BYTE * returnString );
@@ -107,20 +125,32 @@ bool getHexnode4Input3 ( BYTE * inputValue);
 bool getHexnode4Input4 ( BYTE * inputValue);
 bool getHexnode4ADCInput5 ( unsigned * inputValue);
 bool getHexnode4ADCInput6 ( unsigned * inputValue);
-bool setLIN50PDUMk2Enable( BYTE LIN50PDUMk2Enable );
-bool setLIN50PDUMk2PowerSource ( BYTE powerSource);
-bool setLIN50PDUMk2Master ( BYTE master);
-bool setLIN50PDUMk2Lights ( BYTE lights);
-bool setLIN50PDUMk2Awning ( BYTE awning);
-bool setLIN50PDUMk2PumpMode ( BYTE pumpMode);
-bool getLIN50PDUMk2Current ( BYTE Parameter, unsigned * current);
-bool getLIN50PDUMk2FuseDiagnostics ( BYTE size, BYTE * fuseDiagnostics);
-bool getLIN50PDUMk2Voltmeter ( BYTE Parameter,  unsigned * voltage);
-bool getLIN50PDUMk2WaterLevel ( BYTE Parameter,  unsigned * waterLevel);
-bool getLIN50PDUMk2Temperature ( BYTE Parameter,  BYTE * temperature);
-bool getLIN50PDUMk2MainsSignal ( BYTE * mainsSignal);
-bool getLIN50PDUMk2IgnitionSignal ( BYTE * ignitionSignal);
-bool getLIN50PDUMk2PumpFeedback ( BYTE * pumpFeedback);
+bool setLIN50PDUEnable( BYTE LIN50PDUEnable );
+bool setLIN50PDUPowerSource ( BYTE powerSource);
+bool setLIN50PDUMaster ( BYTE master);
+bool setLIN50PDULights ( BYTE lights);
+bool setLIN50PDUAwning ( BYTE awning);
+bool setLIN50PDUPumpMode ( BYTE pumpMode);
+bool getLIN50PDULoadCurrent ( unsigned * current);
+bool getLIN50PDUSolarCurrent ( unsigned * current);
+bool getLIN50PDULeisureBatteryCurrent ( unsigned * current);
+bool getLIN50PDUVehicleBatteryCurrent ( unsigned * current);
+bool getLIN50PDUMainsCurrent ( unsigned * current);
+bool getLIN50PDUFuseState ( unsigned * fuseState);
+bool getLIN50PDUOutputOverloadState (BYTE * overloadState);
+bool getLIN50PDULeisureBatteryVoltage ( unsigned * voltage);
+bool getLIN50PDUVehicleBatteryVoltage ( unsigned * voltage);
+bool getLIN50PDUWaterLevel ( unsigned * waterLevel);
+bool getLIN50PDUWasteLevel ( unsigned * wasteLevel);
+bool getLIN50PDUInternalTemperature ( BYTE * temperature);
+bool getLIN50PDUExternalTemperature ( BYTE * temperature);
+bool getLIN50PDUMainsSignal ( BYTE * mainsSignal);
+bool getLIN50PDUIgnitionSignal ( BYTE * ignitionSignal);
+bool getLIN50PDUPumpFeedback ( BYTE * pumpFeedback);
+bool initCommandTable( void );
+bool addCommandTableEntry( struct command * commandEntry );
+bool enableCommandHandler( void );
+bool disableCommandHandler( void );
 
 
 #ifdef	__cplusplus

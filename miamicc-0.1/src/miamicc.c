@@ -30,6 +30,7 @@ typedef bool(*boolFunctionIntPInt)(int, int *);
 typedef bool(*boolFunctionPWord)(WORD *);
 typedef bool(*boolFunctionPStringInt)(char *, int);
 typedef bool(*boolFunctionPStringPInt)(char *, int *);
+typedef bool(*boolFunctionPCmdEntry)(struct command *);
 
 enum {
     boolFunctionVoidType,
@@ -46,8 +47,8 @@ enum {
 	getLINProductIDType,
 	getLINProductSNType,
 	assignFrameIDRangeType,
-    overloadStatusType
-};
+    overloadStatusType,
+    boolFunctionPCmdEntryType};
 
 typedef struct translation_s
 {
@@ -93,10 +94,12 @@ static dwSet_t functionList[] =
 			{ "getLINProductID", &getLINProductID, getLINProductIDType, "Get the LIN Product ID", "Lin Product ID", "  Usage: --getLINProductID=<nodeAddress>, range 0-63" },
 			{ "getLINProductSN", &getLINProductSN, getLINProductSNType, "Get the LIN Product SN", "Lin Product SN", "  Usage: --getLINProductSN=<nodeAddress>, range 0-63" },
 			{ "assignFrameIDRange", &assignFrameIDRange, assignFrameIDRangeType, "assign Frame ID Range", "Frame ID Range", "  Usage: --assignFrameIDRange= XX XX XX XX XX XX" },
+            { "setSpaceHeaterEnable", &setSpaceHeaterEnable, boolFunctionByteType, "Enable Space Heater", NULL, "Usage: --setSpaceHeaterEnable=1 to enable =0 to disable"},
             { "setSpaceHeaterMode", &setSpaceHeaterMode, boolFunctionByteType, "set SpaceHeater Mode", NULL, "Usage: --setSpaceHeaterMode=X range 0-8"},
             { "getSpaceHeaterBurnerStatus", &getSpaceHeaterBurnerStatus, boolFunctionPByteType, "Get State of Space Heater Burner", "Space Heater Burner Status", ""},
             { "getSpaceHeaterErrorCode", &getSpaceHeaterErrorCode, boolFunctionPByteType, "Get Error State of Space Heater Burner", "Space Heater Error Code", ""},
             { "setSpaceHeaterPowerLED", &setSpaceHeaterPowerLED, boolFunctionByteType, "set SpaceHeater Power LED", NULL, "Usage: --setSpaceHeaterPowerLED=X, 1=ON 0=OFF"},
+            { "setWaterHeaterEnable", &setWaterHeaterEnable, boolFunctionByteType, "Enable Water Heater", NULL, "Usage: --setWaterHeaterEnable=1 to enable =0 to disable"},
             { "setWaterHeaterMode", &setWaterHeaterMode, boolFunctionByteType, "set WaterHeater Mode", NULL, "Usage: --setWaterHeaterMode=X range 0-8"},
             { "getWaterHeaterBurnerStatus", &getWaterHeaterBurnerStatus, boolFunctionPByteType, "Get State of Water Heater Burner", "Water Heater Burner Status", ""},
             { "getWaterHeaterErrorCode", &getWaterHeaterErrorCode, boolFunctionPByteType, "Get Error State of Water Heater Burner", "Water Heater Error Code", ""},
@@ -112,7 +115,7 @@ static dwSet_t functionList[] =
             { "setOutput1", &setOutput1, boolFunctionByteType, "Set LIN100PDU Output 1", NULL, "Usage: --setOutput1=<XX>, range 0-255"},
             { "setOutput2", &setOutput2, boolFunctionByteType, "Set LIN100PDU Output 2", NULL, "Usage: --setOutput2=<XX>, range 0-255"},
             { "setOutput3", &setOutput3, boolFunctionByteType, "Set LIN100PDU Output 3", NULL, "Usage: --setOutput3=<XX>, range 0-255"},
-            { "getOutputOverloadState", &getOutputOverloadState, overloadStatusType, "LIN100PDU Output Overload status", NULL, "Usage: --getOutputOverloadState"},
+            { "getOutputOverloadState", &getOutputOverloadState, boolFunctionPByteType, "LIN100PDU Output Overload status", NULL, "Usage: --getOutputOverloadState"},
             { "getPositiveInput1", &getPositiveInput1, boolFunctionPByteType, "Get Digital State of LIN100PDU Positive Input 1", "Positive Input 1", ""},
             { "getPositiveInput2", &getPositiveInput2, boolFunctionPByteType, "Get Digital State of LIN100PDU Positive Input 2", "Positive Input 2", ""},
             { "getNegativeInput1", &getNegativeInput1, boolFunctionPByteType, "Get Digital State of LIN100PDU Negative Input 1", "Negative Input 1", ""},
@@ -125,13 +128,81 @@ static dwSet_t functionList[] =
             { "setHexnode1Output4", &setHexnode1Output4, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode1Output4=<XX>, range 0-255"},
             { "setHexnode1Output5", &setHexnode1Output5, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode1Output5=<XX>, range 0-255"},
             { "setHexnode1Output6", &setHexnode1Output6, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode1Output6=<XX>, range 0-255"},
-            { "getHexnode1OutputOverloadStatus", &getHexnode1OutputOverloadStatus, overloadStatusType, "Hexnode Overload staus", NULL, "Usage: --getHexnode1OverloadStatus"},
+            { "getHexnode1OutputOverloadStatus", &getHexnode1OutputOverloadStatus, boolFunctionPByteType, "Hexnode Overload status", NULL, "Usage: --getHexnode1OverloadStatus"},
             { "getHexnode1Input1", &getHexnode1Input1, boolFunctionPByteType, "Get State of Hexnode 1 Input 1", "Hexnode 1 Input 1", ""},
             { "getHexnode1Input2", &getHexnode1Input1, boolFunctionPByteType, "Get State of Hexnode 1 Input 2", "Hexnode 1 Input 2", ""},
             { "getHexnode1Input3", &getHexnode1Input1, boolFunctionPByteType, "Get State of Hexnode 1 Input 3", "Hexnode 1 Input 3", ""},
             { "getHexnode1Input4", &getHexnode1Input1, boolFunctionPByteType, "Get State of Hexnode 1 Input 4", "Hexnode 1 Input 4", ""},
             { "getHexnode1ADCInput5", &getHexnode1ADCInput5, boolFunctionPIntType, "Get 10 bit ADC Value of Hexnode 1 Input 5", "Hexnode 1 ADC Input 5", ""},
             { "getHexnode1ADCInput6", &getHexnode1ADCInput6, boolFunctionPIntType, "Get 10 bit ADC Value of Hexnode 1 Input 6", "Hexnode 1 ADC Input 6", ""},
+            { "setHexnode2Enable", &setHexnode2Enable, boolFunctionByteType, "Enable Hexnode 2", NULL, "Usage: --setHexnode2Enable=1 to enable =0 to disable"},
+            { "setHexnode2Output1", &setHexnode2Output1, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode2Output1=<XX>, range 0-255"},
+            { "setHexnode2Output2", &setHexnode2Output2, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode2Output2=<XX>, range 0-255"},
+            { "setHexnode2Output3", &setHexnode2Output3, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode2Output3=<XX>, range 0-255"},
+            { "setHexnode2Output4", &setHexnode2Output4, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode2Output4=<XX>, range 0-255"},
+            { "setHexnode2Output5", &setHexnode2Output5, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode2Output5=<XX>, range 0-255"},
+            { "setHexnode2Output6", &setHexnode2Output6, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode2Output6=<XX>, range 0-255"},
+            { "getHexnode2OutputOverloadStatus", &getHexnode2OutputOverloadStatus, boolFunctionPByteType, "Hexnode Overload status", NULL, "Usage: --getHexnode2OverloadStatus"},
+            { "getHexnode2Input1", &getHexnode2Input1, boolFunctionPByteType, "Get State of Hexnode 2 Input 1", "Hexnode 2 Input 1", ""},
+            { "getHexnode2Input2", &getHexnode2Input1, boolFunctionPByteType, "Get State of Hexnode 2 Input 2", "Hexnode 2 Input 2", ""},
+            { "getHexnode2Input3", &getHexnode2Input1, boolFunctionPByteType, "Get State of Hexnode 2 Input 3", "Hexnode 2 Input 3", ""},
+            { "getHexnode2Input4", &getHexnode2Input1, boolFunctionPByteType, "Get State of Hexnode 2 Input 4", "Hexnode 2 Input 4", ""},
+            { "getHexnode2ADCInput5", &getHexnode2ADCInput5, boolFunctionPIntType, "Get 10 bit ADC Value of Hexnode 2 Input 5", "Hexnode 2 ADC Input 5", ""},
+            { "getHexnode2ADCInput6", &getHexnode2ADCInput6, boolFunctionPIntType, "Get 10 bit ADC Value of Hexnode 2 Input 6", "Hexnode 2 ADC Input 6", ""},
+            { "setHexnode3Enable", &setHexnode3Enable, boolFunctionByteType, "Enable Hexnode 3", NULL, "Usage: --setHexnode3Enable=1 to enable =0 to disable"},
+            { "setHexnode3Output1", &setHexnode3Output1, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode3Output1=<XX>, range 0-255"},
+            { "setHexnode3Output2", &setHexnode3Output2, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode3Output2=<XX>, range 0-255"},
+            { "setHexnode3Output3", &setHexnode3Output3, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode3Output3=<XX>, range 0-255"},
+            { "setHexnode3Output4", &setHexnode3Output4, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode3Output4=<XX>, range 0-255"},
+            { "setHexnode3Output5", &setHexnode3Output5, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode3Output5=<XX>, range 0-255"},
+            { "setHexnode3Output6", &setHexnode3Output6, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode3Output6=<XX>, range 0-255"},
+            { "getHexnode3OutputOverloadStatus", &getHexnode3OutputOverloadStatus, boolFunctionPByteType, "Hexnode Overload status", NULL, "Usage: --getHexnode3OverloadStatus"},
+            { "getHexnode3Input1", &getHexnode3Input1, boolFunctionPByteType, "Get State of Hexnode 3 Input 1", "Hexnode 3 Input 1", ""},
+            { "getHexnode3Input2", &getHexnode3Input1, boolFunctionPByteType, "Get State of Hexnode 3 Input 2", "Hexnode 3 Input 2", ""},
+            { "getHexnode3Input3", &getHexnode3Input1, boolFunctionPByteType, "Get State of Hexnode 3 Input 3", "Hexnode 3 Input 3", ""},
+            { "getHexnode3Input4", &getHexnode3Input1, boolFunctionPByteType, "Get State of Hexnode 3 Input 4", "Hexnode 3 Input 4", ""},
+            { "getHexnode3ADCInput5", &getHexnode3ADCInput5, boolFunctionPIntType, "Get 10 bit ADC Value of Hexnode 3 Input 5", "Hexnode 3 ADC Input 5", ""},
+            { "getHexnode3ADCInput6", &getHexnode3ADCInput6, boolFunctionPIntType, "Get 10 bit ADC Value of Hexnode 3 Input 6", "Hexnode 3 ADC Input 6", ""},
+            { "setHexnode4Enable", &setHexnode4Enable, boolFunctionByteType, "Enable Hexnode 4", NULL, "Usage: --setHexnode4Enable=1 to enable =0 to disable"},
+            { "setHexnode4Output1", &setHexnode4Output1, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode4Output1=<XX>, range 0-255"},
+            { "setHexnode4Output2", &setHexnode4Output2, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode4Output2=<XX>, range 0-255"},
+            { "setHexnode4Output3", &setHexnode4Output3, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode4Output3=<XX>, range 0-255"},
+            { "setHexnode4Output4", &setHexnode4Output4, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode4Output4=<XX>, range 0-255"},
+            { "setHexnode4Output5", &setHexnode4Output5, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode4Output5=<XX>, range 0-255"},
+            { "setHexnode4Output6", &setHexnode4Output6, boolFunctionByteType, "Set Hexnode Output", NULL, "Usage: --setHexnode4Output6=<XX>, range 0-255"},
+            { "getHexnode4OutputOverloadStatus", &getHexnode4OutputOverloadStatus, boolFunctionPByteType, "Hexnode Overload status", NULL, "Usage: --getHexnode4OverloadStatus"},
+            { "getHexnode4Input1", &getHexnode4Input1, boolFunctionPByteType, "Get State of Hexnode 4 Input 1", "Hexnode 4 Input 1", ""},
+            { "getHexnode4Input2", &getHexnode4Input1, boolFunctionPByteType, "Get State of Hexnode 4 Input 2", "Hexnode 4 Input 2", ""},
+            { "getHexnode4Input3", &getHexnode4Input1, boolFunctionPByteType, "Get State of Hexnode 4 Input 3", "Hexnode 4 Input 3", ""},
+            { "getHexnode4Input4", &getHexnode4Input1, boolFunctionPByteType, "Get State of Hexnode 4 Input 4", "Hexnode 4 Input 4", ""},
+            { "getHexnode4ADCInput5", &getHexnode4ADCInput5, boolFunctionPIntType, "Get 10 bit ADC Value of Hexnode 4 Input 5", "Hexnode 4 ADC Input 5", ""},
+            { "getHexnode4ADCInput6", &getHexnode4ADCInput6, boolFunctionPIntType, "Get 10 bit ADC Value of Hexnode 4 Input 6", "Hexnode 4 ADC Input 6", ""},
+            { "setLIN50PDUEnable", &setLIN50PDUEnable, boolFunctionByteType, "Enable LIN50PDU 4", NULL, "Usage: --setLIN50PDUEnable=1 to enable =0 to disable"},
+            { "setLIN50PDUPowerSource", &setLIN50PDUPowerSource, boolFunctionByteType, "set LIN50PDU Power Source", NULL, "Usage: --setLIN50PDUPowerSource=0 Leisure 1, Vehicle"},
+            { "setLIN50PDUMaster", &setLIN50PDUMaster, boolFunctionByteType, "set LIN50PDU Master Switch", NULL, "Usage: --setLIN50PDUMaster=0 off 1, on"},
+            { "setLIN50PDULights", &setLIN50PDULights, boolFunctionByteType, "set LIN50PDU Lights Switch", NULL, "Usage: --setLIN50PDULights=0 off 1, on"},
+            { "setLIN50PDUAwning", &setLIN50PDUAwning, boolFunctionByteType, "set LIN50PDU Awning Lights Switch", NULL, "Usage: --setLIN50PDUAwning=0 off 1, on"},
+            { "setLIN50PDUPumpMode", &setLIN50PDUPumpMode, boolFunctionByteType, "set LIN50PDU Pump MOde", NULL, "Usage: --setLIN50PDUPumpMode=0 off, 1 External Pump On, 2 Internal Pump ON, 3 Fill internal from external"},
+            { "getLIN50PDULoadCurrent", &getLIN50PDULoadCurrent, boolFunctionPIntType, "Get then Load Current", "Load Current", ""},
+            { "getLIN50PDUSolarCurrent", &getLIN50PDUSolarCurrent, boolFunctionPIntType, "Get then Solar Load Current", "Solar Current", ""},
+            { "getLIN50PDULeisureBatteryCurrent", &getLIN50PDULeisureBatteryCurrent, boolFunctionPIntType, "Get then Leisure Battery Current", "Leisure Battery Current", ""},
+            { "getLIN50PDUVehicleBatteryCurrent", &getLIN50PDUVehicleBatteryCurrent, boolFunctionPIntType, "Get then Vehicle Battery Current", "Vehicle Battery Current", ""},
+            { "getLIN50PDUMainsCurrent", &getLIN50PDUMainsCurrent, boolFunctionPIntType, "Get then Mains Current", "Mains Current", ""},
+            { "getLIN50PDUFuseState", &getLIN50PDUFuseState, boolFunctionPIntType, "LIN50PDU Fuse status", NULL, "Usage: --getLIN50PDUFuseState"},
+            { "getLIN50PDUOutputOverloadState", &getLIN50PDUOutputOverloadState, boolFunctionPByteType, "LIN50PDU Output Overload status", NULL, "Usage: --getLIN50PDUOutputOverloadState"},
+            { "getLIN50PDULeisureBatteryVoltage", &getLIN50PDULeisureBatteryVoltage, boolFunctionPIntType, "Get the Leisure Battery Voltage", "Leisure Battery Voltage", ""},
+            { "getLIN50PDUVehicleBatteryVoltage", &getLIN50PDUVehicleBatteryVoltage, boolFunctionPIntType, "Get the Vehicle Battery Voltage", "Vehicle Battery Voltage", ""},
+            { "getLIN50PDUWaterLevel", &getLIN50PDUWaterLevel, boolFunctionPIntType, "Get the Water Level", "Water Level", ""},
+            { "getLIN50PDUWasteLevel", &getLIN50PDUWasteLevel, boolFunctionPIntType, "Get the Waste Level", "Waste Level", ""},
+            { "getLIN50PDUInternalTemperature", &getLIN50PDUInternalTemperature, boolFunctionPByteType, "Get the Internal Temperature", "Internal Temperature", ""},
+            { "getLIN50PDUExternalTemperature", &getLIN50PDUExternalTemperature, boolFunctionPByteType, "Get the External Temperature", "External Temperature", ""},
+            { "getLIN50PDUMainsSignal", &getLIN50PDUMainsSignal, boolFunctionPByteType, "Get whether mains is connected", "Mains Signal", ""},
+            { "getLIN50PDUIgnitionSignal", &getLIN50PDUIgnitionSignal, boolFunctionPByteType, "Get whether ignition is on or off", "Ignition Signal", ""},
+            { "getLIN50PDUPumpFeedback", &getLIN50PDUPumpFeedback, boolFunctionPByteType, "Get whether the pump is on or off", "Pump", ""},
+            { "initCommandTable", &initCommandTable, boolFunctionVoidType, "initalise Command Table", NULL, "Usage: --initCommandTable"},
+            { "enableCommandHandler", &enableCommandHandler, boolFunctionVoidType, "Enable Command Handler", NULL, "Usage: --enableCommandHandler"},
+            { "disableCommandHandler", &disableCommandHandler, boolFunctionVoidType, "Disable Command Handler", NULL, "Usage: --disableCommandHandler"},
+            { "addCommandTableEntry", &addCommandTableEntry, boolFunctionPCmdEntryType, "add an entry to the Command Table", NULL, "Usage: --addCommandTableEntry= Param1 Param2 ... Param8 (all in Decimal)"},
             {  NULL, NULL,0}
         };
 
@@ -590,6 +661,27 @@ int main(int argc, char *argv[])
                     }
                     break;
 
+                    case boolFunctionPCmdEntryType:
+                    {
+                            int param1, param2, param3, param4, param5, param6, param7, param8;
+                            if (sscanf(parameters, "%d/%d/%d/%d/%d/%d/%d/%d", &param1, &param2, &param3, &param4, &param5, &param6, &param7, &param8)==8)
+                            {
+                                struct command commandTableEntry;
+                                commandTableEntry.commandID =           (int)param1;
+                                commandTableEntry.param =               (int)param2;
+                                commandTableEntry.msRepeatTime =        (unsigned)param3;
+                                commandTableEntry.checkReturnValue =    (bool)param4;
+                                commandTableEntry.toggleMode =          (BYTE)param5;
+                                commandTableEntry.comparisonType =      (BYTE)param6;
+                                commandTableEntry.value1 =              (int)param7;
+                                commandTableEntry.value2 =              (int)param8;
+
+                                isOk = (*((boolFunctionPCmdEntry)thingy->functionPointer))(&commandTableEntry) && isOk;
+                            }
+                            else
+                                fprintf(stderr,"Error param boolFunctionPCmdEntryType\n");
+                    }
+                    break;
 					default:
                         fprintf(stderr, "unknown type\n");
                 }

@@ -127,6 +127,18 @@ bool setSpaceHeaterPowerLED(BYTE spaceHeaterPowerLED)
     return false;
 }
 
+bool setSpaceHeaterEnable(BYTE inputValue)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_setSpaceHeaterEnable;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_setSpaceHeaterEnable;
+    abyCommandPacket[2]=(BYTE)inputValue;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        return isAck(abyResponsePacket);
+    }
+    return false;
+}
+
 bool setWaterHeaterMode(BYTE waterHeaterMode)
 {
 	abyCommandPacket[PAL_BYTE]=DDAPI_PAL_setWaterHeaterMode;
@@ -182,6 +194,19 @@ bool setWaterHeaterPowerLED(BYTE waterHeaterPowerLED)
     }
     return false;
 }
+
+bool setWaterHeaterEnable(BYTE inputValue)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_setWaterHeaterEnable;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_setWaterHeaterEnable;
+    abyCommandPacket[2]=(BYTE)inputValue;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        return isAck(abyResponsePacket);
+    }
+    return false;
+}
+
 
 bool setLIN100PDUEnable(BYTE inputValue)
 {
@@ -344,7 +369,7 @@ bool getOutputOverloadState(BYTE * overloadStatus)
 		if (abyResponsePacket[PAL_BYTE] == PTCM_PAL_getHexnode1OutputOverloadStatus
 			&& abyResponsePacket[OPCODE_BYTE] == PTCM_RETCODE_getHexnode1OutputOverloadStatus)
 		{
-			memcpy(overloadStatus, &abyResponsePacket[2], getHexnode1OutputOverloadStatus_PACKET_LENGTH - 2);
+			*overloadStatus = (BYTE) abyResponsePacket[2] ;
 			return true;
 		}
 	}
@@ -524,8 +549,7 @@ bool getHexnode1OutputOverloadStatus(BYTE * overloadStatus)
 		if (abyResponsePacket[PAL_BYTE] == PTCM_PAL_getHexnode1OutputOverloadStatus
 			&& abyResponsePacket[OPCODE_BYTE] == PTCM_RETCODE_getHexnode1OutputOverloadStatus)
 		{
-			memcpy(overloadStatus, &abyResponsePacket[2], getHexnode1OutputOverloadStatus_PACKET_LENGTH - 2);
-			return true;
+			*overloadStatus = (BYTE) abyResponsePacket[2] ;
 		}
 	}
 	return false;
@@ -720,8 +744,7 @@ bool getHexnode2OutputOverloadStatus(BYTE * overloadStatus)
 		if (abyResponsePacket[PAL_BYTE] == PTCM_PAL_getHexnode2OutputOverloadStatus
 			&& abyResponsePacket[OPCODE_BYTE] == PTCM_RETCODE_getHexnode2OutputOverloadStatus)
 		{
-			memcpy(overloadStatus, &abyResponsePacket[2], getHexnode2OutputOverloadStatus_PACKET_LENGTH - 2);
-			return true;
+			*overloadStatus = (BYTE) abyResponsePacket[2] ;
 		}
 	}
 	return false;
@@ -916,8 +939,7 @@ bool getHexnode3OutputOverloadStatus(BYTE * overloadStatus)
 		if (abyResponsePacket[PAL_BYTE] == PTCM_PAL_getHexnode3OutputOverloadStatus
 			&& abyResponsePacket[OPCODE_BYTE] == PTCM_RETCODE_getHexnode3OutputOverloadStatus)
 		{
-			memcpy(overloadStatus, &abyResponsePacket[2], getHexnode3OutputOverloadStatus_PACKET_LENGTH - 2);
-			return true;
+			*overloadStatus = (BYTE) abyResponsePacket[2] ;
 		}
 	}
 	return false;
@@ -1112,8 +1134,7 @@ bool getHexnode4OutputOverloadStatus(BYTE * overloadStatus)
 		if (abyResponsePacket[PAL_BYTE] == PTCM_PAL_getHexnode4OutputOverloadStatus
 			&& abyResponsePacket[OPCODE_BYTE] == PTCM_RETCODE_getHexnode4OutputOverloadStatus)
 		{
-			memcpy(overloadStatus, &abyResponsePacket[2], getHexnode4OutputOverloadStatus_PACKET_LENGTH - 2);
-			return true;
+			*overloadStatus = (BYTE) abyResponsePacket[2] ;
 		}
 	}
 	return false;
@@ -1209,6 +1230,334 @@ bool getHexnode4ADCInput6(unsigned * inputValue)
             && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getHexnode4ADCInput6 )
         {
             *inputValue = TWOBYTESTOINT(abyResponsePacket[3], abyResponsePacket[2]) ;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool setLIN50PDUEnable(BYTE inputValue)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_setLIN50PDUEnable;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_setLIN50PDUEnable;
+    abyCommandPacket[2]=(BYTE)inputValue;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        return isAck(abyResponsePacket);
+    }
+    return false;
+}
+
+bool setLIN50PDUPowerSource(BYTE PDUPowerSource)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_setLIN50PDUPowerSource;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_setLIN50PDUPowerSource;
+    abyCommandPacket[2]=(BYTE)PDUPowerSource;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        return isAck(abyResponsePacket);
+    }
+    return false;
+}
+
+bool setLIN50PDUMaster(BYTE masterState)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_setLIN50PDUMaster;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_setLIN50PDUMaster;
+    abyCommandPacket[2]=(BYTE)masterState;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        return isAck(abyResponsePacket);
+    }
+    return false;
+}
+
+bool setLIN50PDULights(BYTE lightsState)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_setLIN50PDULights;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_setLIN50PDULights;
+    abyCommandPacket[2]=(BYTE)lightsState;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        return isAck(abyResponsePacket);
+    }
+    return false;
+}
+
+bool setLIN50PDUAwning(BYTE awningLightsState)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_setLIN50PDUAwning;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_setLIN50PDUAwning;
+    abyCommandPacket[2]=(BYTE)awningLightsState;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        return isAck(abyResponsePacket);
+    }
+    return false;
+}
+
+bool setLIN50PDUPumpMode(BYTE pumpMode)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_setLIN50PDUPumpMode;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_setLIN50PDUPumpMode;
+    abyCommandPacket[2]=(BYTE) pumpMode;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        return isAck(abyResponsePacket);
+    }
+    return false;
+}
+
+bool getLIN50PDULoadCurrent(unsigned * loadCurrent)
+{
+   abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDULoadCurrent;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDULoadCurrent;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDULoadCurrent 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDULoadCurrent )
+        {
+            *loadCurrent = TWOBYTESTOINT(abyResponsePacket[3], abyResponsePacket[2]) ;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool getLIN50PDUSolarCurrent(unsigned * current)
+{
+   abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDUSolarCurrent;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDUSolarCurrent;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDUSolarCurrent 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDUSolarCurrent )
+        {
+            *current = TWOBYTESTOINT(abyResponsePacket[3], abyResponsePacket[2]) ;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool getLIN50PDULeisureBatteryCurrent(unsigned * current)
+{
+   abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDULeisureBatteryCurrent;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDULeisureBatteryCurrent;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDULeisureBatteryCurrent 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDULeisureBatteryCurrent )
+        {
+            *current = TWOBYTESTOINT(abyResponsePacket[3], abyResponsePacket[2]) ;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool getLIN50PDUVehicleBatteryCurrent(unsigned * current)
+{
+   abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDUVehicleBatteryCurrent;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDUVehicleBatteryCurrent;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDUVehicleBatteryCurrent 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDUVehicleBatteryCurrent )
+        {
+            *current = TWOBYTESTOINT(abyResponsePacket[3], abyResponsePacket[2]) ;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool getLIN50PDUMainsCurrent(unsigned * current)
+{
+   abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDUMainsCurrent;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDUMainsCurrent;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDUMainsCurrent 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDUMainsCurrent )
+        {
+            *current = TWOBYTESTOINT(abyResponsePacket[3], abyResponsePacket[2]) ;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool getLIN50PDUFuseState(unsigned * fuseState)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDUFuseState;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDUFuseState;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDUFuseState 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDUFuseState )
+        {
+            *fuseState = TWOBYTESTOINT(abyResponsePacket[3], abyResponsePacket[2]) ;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool getLIN50PDUOutputOverloadState(BYTE * overloadStatus)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDUOutputOverloadState;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDUOutputOverloadState;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDUOutputOverloadState 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDUOutputOverloadState )
+        {
+            *overloadStatus = (BYTE)abyResponsePacket[2];
+            return true;
+        }
+    }
+    return false;
+}
+
+bool getLIN50PDULeisureBatteryVoltage(unsigned * voltage)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDULeisureBatteryVoltage;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDULeisureBatteryVoltage;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDULeisureBatteryVoltage 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDULeisureBatteryVoltage )
+        {
+            *voltage = TWOBYTESTOINT(abyResponsePacket[3], abyResponsePacket[2]) ;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool getLIN50PDUVehicleBatteryVoltage(unsigned * voltage)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDUVehicleBatteryVoltage;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDUVehicleBatteryVoltage;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDUVehicleBatteryVoltage 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDUVehicleBatteryVoltage )
+        {
+            *voltage = TWOBYTESTOINT(abyResponsePacket[3], abyResponsePacket[2]) ;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool getLIN50PDUWaterLevel(unsigned * level)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDUWaterLevel;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDUWaterLevel;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDUWaterLevel 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDUWaterLevel )
+        {
+            *level = TWOBYTESTOINT(abyResponsePacket[3], abyResponsePacket[2]) ;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool getLIN50PDUWasteLevel(unsigned * level)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDUWasteLevel;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDUWasteLevel;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDUWasteLevel 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDUWasteLevel )
+        {
+            *level = TWOBYTESTOINT(abyResponsePacket[3], abyResponsePacket[2]) ;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool getLIN50PDUInternalTemperature(BYTE * temperature)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDUInternalTemperature;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDUInternalTemperature;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDUInternalTemperature 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDUInternalTemperature )
+        {
+            *temperature = (BYTE)abyResponsePacket[2];
+            return true;
+        }
+    }
+    return false;
+}
+
+bool getLIN50PDUExternalTemperature(BYTE * temperature)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDUExternalTemperature;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDUExternalTemperature;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDUExternalTemperature 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDUExternalTemperature )
+        {
+            *temperature = (BYTE)abyResponsePacket[2];
+            return true;
+        }
+    }
+    return false;
+}
+
+bool getLIN50PDUMainsSignal(BYTE * signalState)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDUMainsSignal;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDUMainsSignal;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDUMainsSignal 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDUMainsSignal )
+        {
+            *signalState = (BYTE)abyResponsePacket[2];
+            return true;
+        }
+    }
+    return false;
+}
+
+bool getLIN50PDUIgnitionSignal(BYTE * signalState)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDUIgnitionSignal;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDUIgnitionSignal;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDUIgnitionSignal 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDUIgnitionSignal )
+        {
+            *signalState = (BYTE)abyResponsePacket[2];
+            return true;
+        }
+    }
+    return false;
+}
+
+bool getLIN50PDUPumpFeedback(BYTE * pumpState)
+{
+    abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLIN50PDUPumpFeedback;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLIN50PDUPumpFeedback;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLIN50PDUPumpFeedback
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLIN50PDUPumpFeedback)
+        {
+            *pumpState = (BYTE)abyResponsePacket[2];
             return true;
         }
     }

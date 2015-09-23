@@ -147,26 +147,32 @@
 #define DDAPI_PAL_getHexnode4Input4                   DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getHexnode4ADCInput5                DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getHexnode4ADCInput6                DDAPI_PACKET_ID + 0x02
-#define DDAPI_PAL_setLIN50PDUMk2Enable                DDAPI_PACKET_ID + 0x03
-#define DDAPI_PAL_setLIN50PDUMk2PowerSource           DDAPI_PACKET_ID + 0x03
-#define DDAPI_PAL_setLIN50PDUMk2Master                DDAPI_PACKET_ID + 0x03
-#define DDAPI_PAL_setLIN50PDUMk2Lights                DDAPI_PACKET_ID + 0x03
-#define DDAPI_PAL_setLIN50PDUMk2Awning                DDAPI_PACKET_ID + 0x03
-#define DDAPI_PAL_setLIN50PDUMk2PumpMode              DDAPI_PACKET_ID + 0x03
-#define DDAPI_PAL_getLIN50PDUMk2Current               DDAPI_PACKET_ID + 0x03
-#define DDAPI_PAL_getLIN50PDUMk2FuseDiagnostics       DDAPI_PACKET_ID + 0x03
-#define DDAPI_PAL_getLIN50PDUMk2Voltmeter             DDAPI_PACKET_ID + 0x03
-#define DDAPI_PAL_getLIN50PDUMk2WaterLevel            DDAPI_PACKET_ID + 0x03
-#define DDAPI_PAL_getLIN50PDUMk2Temperature           DDAPI_PACKET_ID + 0x03
-#define DDAPI_PAL_getLIN50PDUMk2MainsSignal           DDAPI_PACKET_ID + 0x02
-#define DDAPI_PAL_getLIN50PDUMk2IgnitionSignal        DDAPI_PACKET_ID + 0x02
-#define DDAPI_PAL_getLIN50PDUMk2PumpFeedback          DDAPI_PACKET_ID + 0x02
-
-
-
-
-
-
+#define DDAPI_PAL_setLIN50PDUEnable                   DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_setLIN50PDUPowerSource              DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_setLIN50PDUMaster                   DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_setLIN50PDULights                   DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_setLIN50PDUAwning                   DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_setLIN50PDUPumpMode                 DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_getLIN50PDULoadCurrent              DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDUSolarCurrent             DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDULeisureBatteryCurrent    DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDUVehicleBatteryCurrent    DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDUMainsCurrent             DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDUFuseState                DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDUOutputOverloadState      DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDULeisureBatteryVoltage    DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDUVehicleBatteryVoltage    DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDUWaterLevel               DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDUWasteLevel               DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDUInternalTemperature      DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDUExternalTemperature      DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDUMainsSignal              DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDUIgnitionSignal           DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_getLIN50PDUPumpFeedback             DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_initCommandTable                    DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_enableCommandHandler                DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_disableCommandHandler               DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_addCommandTableEntry                DDAPI_PACKET_ID + 0x0C
 
 // ---
 // DDAPI Opcodes (2nd Byte of Packet)
@@ -266,22 +272,32 @@
 #define DDAPI_OPCODE_getHexnode4ADCInput5             0x7b
 #define DDAPI_OPCODE_getHexnode4ADCInput6             0x7c
 #define DDAPI_OPCODE_setHexnode4Enable                0x7d
-#define DDAPI_OPCODE_setLIN50PDUMk2PowerSource        0x80
-#define DDAPI_OPCODE_setLIN50PDUMk2Master             0x81
-#define DDAPI_OPCODE_setLIN50PDUMk2Lights             0x82
-#define DDAPI_OPCODE_setLIN50PDUMk2Awning             0x83
-#define DDAPI_OPCODE_setLIN50PDUMk2PumpMode           0x84
-#define DDAPI_OPCODE_getLIN50PDUMk2Current            0x85
-#define DDAPI_OPCODE_getLIN50PDUMk2FuseDiagnostics    0x86
-#define DDAPI_OPCODE_getLIN50PDUMk2Voltmeter          0x87
-#define DDAPI_OPCODE_getLIN50PDUMk2WaterLevel         0x88
-#define DDAPI_OPCODE_getLIN50PDUMk2Temperature        0x89
-#define DDAPI_OPCODE_getLIN50PDUMk2MainsSignal        0x8a
-#define DDAPI_OPCODE_getLIN50PDUMk2IgnitionSignal     0x8b
-#define DDAPI_OPCODE_getLIN50PDUMk2PumpFeedback       0x8c
-#define DDAPI_OPCODE_setLIN50PDUMk2Enable             0x8d
-
-
+#define DDAPI_OPCODE_setLIN50PDUEnable                   0x80
+#define DDAPI_OPCODE_setLIN50PDUPowerSource              0x81
+#define DDAPI_OPCODE_setLIN50PDUMaster                   0x82
+#define DDAPI_OPCODE_setLIN50PDULights                   0x83
+#define DDAPI_OPCODE_setLIN50PDUAwning                   0x84
+#define DDAPI_OPCODE_setLIN50PDUPumpMode                 0x85
+#define DDAPI_OPCODE_getLIN50PDULoadCurrent              0x86
+#define DDAPI_OPCODE_getLIN50PDUSolarCurrent             0x87
+#define DDAPI_OPCODE_getLIN50PDULeisureBatteryCurrent    0x88
+#define DDAPI_OPCODE_getLIN50PDUVehicleBatteryCurrent    0x89
+#define DDAPI_OPCODE_getLIN50PDUMainsCurrent             0x8A
+#define DDAPI_OPCODE_getLIN50PDUFuseState                0x8B
+#define DDAPI_OPCODE_getLIN50PDUOutputOverloadState      0x8C
+#define DDAPI_OPCODE_getLIN50PDULeisureBatteryVoltage    0x8D
+#define DDAPI_OPCODE_getLIN50PDUVehicleBatteryVoltage    0x8E
+#define DDAPI_OPCODE_getLIN50PDUWaterLevel               0x8F
+#define DDAPI_OPCODE_getLIN50PDUWasteLevel               0x90
+#define DDAPI_OPCODE_getLIN50PDUInternalTemperature      0x91
+#define DDAPI_OPCODE_getLIN50PDUExternalTemperature      0x92
+#define DDAPI_OPCODE_getLIN50PDUMainsSignal              0x93
+#define DDAPI_OPCODE_getLIN50PDUIgnitionSignal           0x94
+#define DDAPI_OPCODE_getLIN50PDUPumpFeedback             0x95
+#define DDAPI_OPCODE_initCommandTable                    0xF0
+#define DDAPI_OPCODE_enableCommandHandler                0xF1
+#define DDAPI_OPCODE_disableCommandHandler               0xF2
+#define DDAPI_OPCODE_addCommandTableEntry                0xF3
 
 
 // ---
@@ -309,48 +325,56 @@
 #define getLeisureBatteryVoltage_PACKET_LENGTH             0x03
 #define getVehicleBatteryVoltage_PACKET_LENGTH             0x03
 #define getLoadCurrent_PACKET_LENGTH                       0x03
-#define getOutputOverloadState_PACKET_LENGTH               0x05
+#define getOutputOverloadState_PACKET_LENGTH               0x03
 #define getPositiveInput1_PACKET_LENGTH                    0x03
 #define getPositiveInput2_PACKET_LENGTH                    0x03
 #define getNegativeInput1_PACKET_LENGTH                    0x03
 #define getADCInput1_PACKET_LENGTH                         0x04
 #define getADCInput2_PACKET_LENGTH                         0x04
-#define getHexnode1OutputOverloadStatus_PACKET_LENGTH      0x08
+#define getHexnode1OutputOverloadStatus_PACKET_LENGTH      0x03
 #define getHexnode1Input1_PACKET_LENGTH                    0x03
 #define getHexnode1Input2_PACKET_LENGTH                    0x03
 #define getHexnode1Input3_PACKET_LENGTH                    0x03
 #define getHexnode1Input4_PACKET_LENGTH                    0x03
 #define getHexnode1ADCInput5_PACKET_LENGTH                 0x04
 #define getHexnode1ADCInput6_PACKET_LENGTH                 0x04
-#define getHexnode2OutputOverloadStatus_PACKET_LENGTH      0x08
+#define getHexnode2OutputOverloadStatus_PACKET_LENGTH      0x03
 #define getHexnode2Input1_PACKET_LENGTH                    0x03
 #define getHexnode2Input2_PACKET_LENGTH                    0x03
 #define getHexnode2Input3_PACKET_LENGTH                    0x03
 #define getHexnode2Input4_PACKET_LENGTH                    0x03
 #define getHexnode2ADCInput5_PACKET_LENGTH                 0x04
 #define getHexnode2ADCInput6_PACKET_LENGTH                 0x04
-#define getHexnode3OutputOverloadStatus_PACKET_LENGTH      0x08
+#define getHexnode3OutputOverloadStatus_PACKET_LENGTH      0x03
 #define getHexnode3Input1_PACKET_LENGTH                    0x03
 #define getHexnode3Input2_PACKET_LENGTH                    0x03
 #define getHexnode3Input3_PACKET_LENGTH                    0x03
 #define getHexnode3Input4_PACKET_LENGTH                    0x03
 #define getHexnode3ADCInput5_PACKET_LENGTH                 0x04
 #define getHexnode3ADCInput6_PACKET_LENGTH                 0x04
-#define getHexnode4OutputOverloadStatus_PACKET_LENGTH      0x08
+#define getHexnode4OutputOverloadStatus_PACKET_LENGTH      0x03
 #define getHexnode4Input1_PACKET_LENGTH                    0x03
 #define getHexnode4Input2_PACKET_LENGTH                    0x03
 #define getHexnode4Input3_PACKET_LENGTH                    0x03
 #define getHexnode4Input4_PACKET_LENGTH                    0x03
 #define getHexnode4ADCInput5_PACKET_LENGTH                 0x04
 #define getHexnode4ADCInput6_PACKET_LENGTH                 0x04
-#define getLIN50PDUMk2Current_PACKET_LENGTH                0x05
-#define getLIN50PDUMk2FuseDiagnostics_PACKET_LENGTH        0x05
-#define getLIN50PDUMk2Voltmeter_PACKET_LENGTH              0x05
-#define getLIN50PDUMk2WaterLevel_PACKET_LENGTH             0x05
-#define getLIN50PDUMk2Temperature_PACKET_LENGTH            0x04
-#define getLIN50PDUMk2MainsSignal_PACKET_LENGTH            0x03
-#define getLIN50PDUMk2IgnitionSignal_PACKET_LENGTH         0x03
-#define getLIN50PDUMk2PumpFeedback_PACKET_LENGTH           0x03
+#define getLIN50PDULoadCurrent_PACKET_LENGTH               0x04
+#define getLIN50PDUSolarCurrent_PACKET_LENGTH              0x04
+#define getLIN50PDULeisureBatteryCurrent_PACKET_LENGTH     0x04
+#define getLIN50PDUVehicleBatteryCurrent_PACKET_LENGTH     0x04
+#define getLIN50PDUMainsCurrent_PACKET_LENGTH              0x04
+#define getLIN50PDUFuseState_PACKET_LENGTH                 0x04
+#define getLIN50PDUOutputOverloadState_PACKET_LENGTH       0x03
+#define getLIN50PDULeisureBatteryVoltage_PACKET_LENGTH     0x04
+#define getLIN50PDUVehicleBatteryVoltage_PACKET_LENGTH     0x04
+#define getLIN50PDUWaterLevel_PACKET_LENGTH                0x04
+#define getLIN50PDUWasteLevel_PACKET_LENGTH                0x04
+#define getLIN50PDUInternalTemperature_PACKET_LENGTH       0x03
+#define getLIN50PDUExternalTemperature_PACKET_LENGTH       0x03
+#define getLIN50PDUMainsSignal_PACKET_LENGTH               0x03
+#define getLIN50PDUIgnitionSignal_PACKET_LENGTH            0x03
+#define getLIN50PDUPumpFeedback_PACKET_LENGTH              0x03
 
 
 
@@ -411,14 +435,22 @@
 #define PTCM_PAL_getHexnode4Input4                    PTCM_PACKET_ID + getHexnode4Input4_PACKET_LENGTH
 #define PTCM_PAL_getHexnode4ADCInput5                 PTCM_PACKET_ID + getHexnode4ADCInput5_PACKET_LENGTH
 #define PTCM_PAL_getHexnode4ADCInput6                 PTCM_PACKET_ID + getHexnode4ADCInput6_PACKET_LENGTH
-#define PTCM_PAL_getLIN50PDUMk2Current                PTCM_PACKET_ID + getLIN50PDUMk2Current_PACKET_LENGTH
-#define PTCM_PAL_getLIN50PDUMk2FuseDiagnostics        PTCM_PACKET_ID + getLIN50PDUMk2FuseDiagnostics_PACKET_LENGTH
-#define PTCM_PAL_getLIN50PDUMk2Voltmeter              PTCM_PACKET_ID + getLIN50PDUMk2Voltmeter_PACKET_LENGTH
-#define PTCM_PAL_getLIN50PDUMk2WaterLevel             PTCM_PACKET_ID + getLIN50PDUMk2WaterLevel_PACKET_LENGTH
-#define PTCM_PAL_getLIN50PDUMk2Temperature            PTCM_PACKET_ID + getLIN50PDUMk2Temperature_PACKET_LENGTH
-#define PTCM_PAL_getLIN50PDUMk2MainsSignal            PTCM_PACKET_ID + getLIN50PDUMk2MainsSignal_PACKET_LENGTH
-#define PTCM_PAL_getLIN50PDUMk2IgnitionSignal         PTCM_PACKET_ID + getLIN50PDUMk2IgnitionSignal_PACKET_LENGTH
-#define PTCM_PAL_getLIN50PDUMk2PumpFeedback           PTCM_PACKET_ID + getLIN50PDUMk2PumpFeedback_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDULoadCurrent               PTCM_PACKET_ID + getLIN50PDULoadCurrent_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUSolarCurrent              PTCM_PACKET_ID + getLIN50PDUSolarCurrent_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDULeisureBatteryCurrent     PTCM_PACKET_ID + getLIN50PDULeisureBatteryCurrent_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUVehicleBatteryCurrent     PTCM_PACKET_ID + getLIN50PDUVehicleBatteryCurrent_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUMainsCurrent              PTCM_PACKET_ID + getLIN50PDUMainsCurrent_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUFuseState                 PTCM_PACKET_ID + getLIN50PDUFuseState_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUOutputOverloadState       PTCM_PACKET_ID + getLIN50PDUOutputOverloadState_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDULeisureBatteryVoltage     PTCM_PACKET_ID + getLIN50PDULeisureBatteryVoltage_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUVehicleBatteryVoltage     PTCM_PACKET_ID + getLIN50PDUVehicleBatteryVoltage_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUWaterLevel                PTCM_PACKET_ID + getLIN50PDUWaterLevel_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUWasteLevel                PTCM_PACKET_ID + getLIN50PDUWasteLevel_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUInternalTemperature       PTCM_PACKET_ID + getLIN50PDUInternalTemperature_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUExternalTemperature       PTCM_PACKET_ID + getLIN50PDUExternalTemperature_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUMainsSignal               PTCM_PACKET_ID + getLIN50PDUMainsSignal_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUIgnitionSignal            PTCM_PACKET_ID + getLIN50PDUIgnitionSignal_PACKET_LENGTH
+#define PTCM_PAL_getLIN50PDUPumpFeedback              PTCM_PACKET_ID + getLIN50PDUPumpFeedback_PACKET_LENGTH
 
 // ---
 // PTCM RETCODES defines the function it is responding to (2nd Byte of Packet)
@@ -476,13 +508,21 @@
 #define PTCM_RETCODE_getHexnode4Input4                0x7a
 #define PTCM_RETCODE_getHexnode4ADCInput5             0x7b
 #define PTCM_RETCODE_getHexnode4ADCInput6             0x7c
-#define PTCM_RETCODE_getLIN50PDUMk2Current            0x85
-#define PTCM_RETCODE_getLIN50PDUMk2FuseDiagnostics    0x86
-#define PTCM_RETCODE_getLIN50PDUMk2Voltmeter          0x87
-#define PTCM_RETCODE_getLIN50PDUMk2WaterLevel         0x88
-#define PTCM_RETCODE_getLIN50PDUMk2Temperature        0x89
-#define PTCM_RETCODE_getLIN50PDUMk2MainsSignal        0x8a
-#define PTCM_RETCODE_getLIN50PDUMk2IgnitionSignal     0x8b
-#define PTCM_RETCODE_getLIN50PDUMk2PumpFeedback       0x8c
+#define PTCM_RETCODE_getLIN50PDULoadCurrent              0x86
+#define PTCM_RETCODE_getLIN50PDUSolarCurrent             0x87
+#define PTCM_RETCODE_getLIN50PDULeisureBatteryCurrent    0x88
+#define PTCM_RETCODE_getLIN50PDUVehicleBatteryCurrent    0x89
+#define PTCM_RETCODE_getLIN50PDUMainsCurrent             0x8A
+#define PTCM_RETCODE_getLIN50PDUFuseState                0x8B
+#define PTCM_RETCODE_getLIN50PDUOutputOverloadState      0x8C
+#define PTCM_RETCODE_getLIN50PDULeisureBatteryVoltage    0x8D
+#define PTCM_RETCODE_getLIN50PDUVehicleBatteryVoltage    0x8E
+#define PTCM_RETCODE_getLIN50PDUWaterLevel               0x8F
+#define PTCM_RETCODE_getLIN50PDUWasteLevel               0x90
+#define PTCM_RETCODE_getLIN50PDUInternalTemperature      0x91
+#define PTCM_RETCODE_getLIN50PDUExternalTemperature      0x92
+#define PTCM_RETCODE_getLIN50PDUMainsSignal              0x93
+#define PTCM_RETCODE_getLIN50PDUIgnitionSignal           0x94
+#define PTCM_RETCODE_getLIN50PDUPumpFeedback             0x95
 
 #endif
