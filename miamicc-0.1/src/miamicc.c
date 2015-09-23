@@ -664,8 +664,8 @@ int main(int argc, char *argv[])
                     case boolFunctionPCmdEntryType:
                     {
                             int param1, param2, param3, param4, param5, param6, param7, param8;
- //                           fprintf (stdout, "parameters = %s\r\n", parameters);
-                            if (sscanf(parameters, "0x%d\,%d\,%d\,%d\,%d\,%d\,%d\,%d", &param1, &param2, &param3, &param4, &param5, &param6, &param7, &param8)==8)
+//                            fprintf (stdout, "parameters = %s\r\n", parameters);
+                            if (sscanf(parameters, "%d\,%d\,%d\,%d\,%d\,%d\,%d\,%d", &param1, &param2, &param3, &param4, &param5, &param6, &param7, &param8)==8)
                             {
                                 struct command commandTableEntry;
                                 commandTableEntry.commandID =           (int)param1;
