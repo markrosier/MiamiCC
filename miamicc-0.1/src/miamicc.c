@@ -664,6 +664,7 @@ int main(int argc, char *argv[])
                     case boolFunctionPCmdEntryType:
                     {
                             int param1, param2, param3, param4, param5, param6, param7, param8;
+                            fprintf (stdout, "parameters = %s\r\n", parameters);
                             if (sscanf(parameters, "%d/%d/%d/%d/%d/%d/%d/%d", &param1, &param2, &param3, &param4, &param5, &param6, &param7, &param8)==8)
                             {
                                 struct command commandTableEntry;
@@ -675,6 +676,9 @@ int main(int argc, char *argv[])
                                 commandTableEntry.comparisonType =      (BYTE)param6;
                                 commandTableEntry.value1 =              (int)param7;
                                 commandTableEntry.value2 =              (int)param8;
+
+                                fprintf(stdout, "commandID=%2x,param=%d,msRepeatTime=%d,checkReturnValue=%d,toggleMode=%d,comparisonType=%d,value1=%d,value2=%d\r\n",
+                                    param1,param2,param3,param4,param5,param6,param7,param8);
 
                                 isOk = (*((boolFunctionPCmdEntry)thingy->functionPointer))(&commandTableEntry) && isOk;
                             }
