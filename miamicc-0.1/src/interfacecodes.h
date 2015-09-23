@@ -172,7 +172,7 @@
 #define DDAPI_PAL_initCommandTable                    DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_enableCommandHandler                DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_disableCommandHandler               DDAPI_PACKET_ID + 0x02
-#define DDAPI_PAL_addCommandTableEntry                DDAPI_PACKET_ID + 0x0C
+#define DDAPI_PAL_addCommandTableEntry                DDAPI_PACKET_ID + 0x0D
 
 // ---
 // DDAPI Opcodes (2nd Byte of Packet)
