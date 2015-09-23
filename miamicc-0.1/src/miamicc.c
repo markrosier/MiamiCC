@@ -202,7 +202,7 @@ static dwSet_t functionList[] =
             { "initCommandTable", &initCommandTable, boolFunctionVoidType, "initalise Command Table", NULL, "Usage: --initCommandTable"},
             { "enableCommandHandler", &enableCommandHandler, boolFunctionVoidType, "Enable Command Handler", NULL, "Usage: --enableCommandHandler"},
             { "disableCommandHandler", &disableCommandHandler, boolFunctionVoidType, "Disable Command Handler", NULL, "Usage: --disableCommandHandler"},
-            { "addCommandTableEntry", &addCommandTableEntry, boolFunctionPCmdEntryType, "add an entry to the Command Table", NULL, "Usage: --addCommandTableEntry= Param1 Param2 ... Param8 (all in Decimal)"},
+            { "addCommandTableEntry", &addCommandTableEntry, boolFunctionPCmdEntryType, "add an entry to the Command Table", NULL, "Usage: --addCommandTableEntry= Param1,Param2,...,Param8 (all in Decimal)"},
             {  NULL, NULL,0}
         };
 
@@ -375,11 +375,11 @@ int main(int argc, char *argv[])
 
        if (sscanf(argv[argc], "--%[^=]=%s", functionName, parameters)==2)
         {
-            fprintf(stderr,"call %s(%s)\n",functionName,parameters);
+//            fprintf(stderr,"call %s(%s)\n",functionName,parameters);
         }
         else if (sscanf(argv[argc], "--%s", functionName)==1)
         {
-            fprintf(stderr,"call %s()\n",functionName);
+ //           fprintf(stderr,"call %s()\n",functionName);
             parameters[0]='\0';
         }
         else
@@ -664,8 +664,8 @@ int main(int argc, char *argv[])
                     case boolFunctionPCmdEntryType:
                     {
                             int param1, param2, param3, param4, param5, param6, param7, param8;
-                            fprintf (stdout, "parameters = %s\r\n", parameters);
-                            if (sscanf(parameters, "%d/%d/%d/%d/%d/%d/%d/%d", &param1, &param2, &param3, &param4, &param5, &param6, &param7, &param8)==8)
+ //                           fprintf (stdout, "parameters = %s\r\n", parameters);
+                            if (sscanf(parameters, "%d\,%d\,%d\,%d\,%d\,%d\,%d\,%d", &param1, &param2, &param3, &param4, &param5, &param6, &param7, &param8)==8)
                             {
                                 struct command commandTableEntry;
                                 commandTableEntry.commandID =           (int)param1;
@@ -677,7 +677,7 @@ int main(int argc, char *argv[])
                                 commandTableEntry.value1 =              (int)param7;
                                 commandTableEntry.value2 =              (int)param8;
 
-                                fprintf(stdout, "commandID=%2x,param=%d,msRepeatTime=%d,checkReturnValue=%d,toggleMode=%d,comparisonType=%d,value1=%d,value2=%d\r\n",
+                                fprintf(stdout, "commandID=%02x,param=%d,msRepeatTime=%d,checkReturnValue=%d,toggleMode=%d,comparisonType=%d,value1=%d,value2=%d\r\n",
                                     param1,param2,param3,param4,param5,param6,param7,param8);
 
                                 isOk = (*((boolFunctionPCmdEntry)thingy->functionPointer))(&commandTableEntry) && isOk;
