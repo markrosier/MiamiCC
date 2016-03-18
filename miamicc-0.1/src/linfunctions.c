@@ -139,6 +139,17 @@ bool setSpaceHeaterEnable(BYTE inputValue)
     return false;
 }
 
+bool clearSpaceHeaterError( void )
+{
+    abyCommandPacket[PAL_BYTE] = DDAPI_PAL_clearSpaceHeaterError;
+    abyCommandPacket[OPCODE_BYTE] = DDAPI_OPCODE_clearSpaceHeaterError;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        return isAck(abyResponsePacket);
+    }
+    return false;
+}
+
 bool setWaterHeaterMode(BYTE waterHeaterMode)
 {
 	abyCommandPacket[PAL_BYTE]=DDAPI_PAL_setWaterHeaterMode;
@@ -200,6 +211,17 @@ bool setWaterHeaterEnable(BYTE inputValue)
     abyCommandPacket[PAL_BYTE]=DDAPI_PAL_setWaterHeaterEnable;
     abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_setWaterHeaterEnable;
     abyCommandPacket[2]=(BYTE)inputValue;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        return isAck(abyResponsePacket);
+    }
+    return false;
+}
+
+bool clearWaterHeaterError( void )
+{
+    abyCommandPacket[PAL_BYTE] = DDAPI_PAL_clearWaterHeaterError;
+    abyCommandPacket[OPCODE_BYTE] = DDAPI_OPCODE_clearWaterHeaterError;
     if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
     {
         return isAck(abyResponsePacket);

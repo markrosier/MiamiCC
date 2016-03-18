@@ -68,12 +68,14 @@
 #define DDAPI_PAL_getSpaceHeaterErrorStatus           DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_setSpaceHeaterPowerLED              DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_getSpaceHeaterErrorCode             DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_clearSpaceHeaterError				  DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_setWaterHeaterEnable                DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setWaterHeaterMode                  DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_getWaterHeaterBurnerStatus          DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_getWaterHeaterErrorStatus           DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_setWaterHeaterPowerLED              DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_getWaterHeaterErrorCode             DDAPI_PACKET_ID + 0x02
+#define DDAPI_PAL_clearWaterHeaterError				  DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_setLIN100PDUEnable                  DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setPDUPowerSource                   DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_getIgnitionSignal                   DDAPI_PACKET_ID + 0x02
@@ -193,12 +195,14 @@
 #define DDAPI_OPCODE_setSpaceHeaterPowerLED           0x13
 #define DDAPI_OPCODE_getSpaceHeaterErrorCode	      0x14
 #define DDAPI_OPCODE_setSpaceHeaterEnable             0x15
+#define DDAPI_OPCODE_clearSpaceHeaterError			  0x16
 #define DDAPI_OPCODE_setWaterHeaterMode               0x20
 #define DDAPI_OPCODE_getWaterHeaterBurnerStatus	      0x21
 #define DDAPI_OPCODE_getWaterHeaterErrorStatus	      0x22
 #define DDAPI_OPCODE_setWaterHeaterPowerLED           0x23
 #define DDAPI_OPCODE_getWaterHeaterErrorCode	      0x24
 #define DDAPI_OPCODE_setWaterHeaterEnable             0x25
+#define DDAPI_OPCODE_clearWaterHeaterError			  0x26
 #define DDAPI_OPCODE_setPDUPowerSource                0x30
 #define DDAPI_OPCODE_getIgnitionSignal                0x31
 #define DDAPI_OPCODE_get230VPresentSignal             0x32

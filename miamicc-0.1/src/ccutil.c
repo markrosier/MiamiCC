@@ -82,7 +82,7 @@ void printError( char * str )
     }
 }
 
-bool GetChecksum(BYTE *TransmitBuff, BYTE Range)
+BYTE GetChecksum(BYTE *TransmitBuff, BYTE Range)
 {
     BYTE Index;
     BYTE Summation = 0;

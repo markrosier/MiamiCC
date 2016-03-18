@@ -1,0 +1,15 @@
+./miamicc --device=/dev/ttyUSB0 --setSpaceHeaterMode=0
+sleep 0.5
+./miamicc --device=/dev/ttyUSB0 --setSpaceHeaterMode=3
+sleep 0.5
+./miamicc --device=/dev/ttyUSB0 --setSpaceHeaterMode=0
+sleep 0.5
+./miamicc --device=/dev/ttyUSB0 --setSpaceHeaterMode=3
+sleep 0.5
+./miamicc --device=/dev/ttyUSB0 --setSpaceHeaterMode=0
+sleep 0.5
+./miamicc --device=/dev/ttyUSB0 --setSpaceHeaterMode=3
+sleep 0.5
+./miamicc --device=/dev/ttyUSB0 --setSpaceHeaterMode=0
+sleep 1
+./miamicc --device=/dev/ttyUSB0 --getSpaceHeaterErrorCode
