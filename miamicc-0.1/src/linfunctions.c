@@ -71,6 +71,22 @@ bool saveConfiguration(BYTE NodeAddress)
 	return true;
 }
 
+bool getLINCommsStatus(BYTE * commsStatus)
+{
+   abyCommandPacket[PAL_BYTE]=DDAPI_PAL_getLINCommsStatus;
+    abyCommandPacket[OPCODE_BYTE]=DDAPI_OPCODE_getLINCommsStatus;
+    if (sendMessage(abyCommandPacket, abyResponsePacket) == true)
+    {
+        if (abyResponsePacket[PAL_BYTE]==PTCM_PAL_getLINCommsStatus 
+            && abyResponsePacket[OPCODE_BYTE]==PTCM_RETCODE_getLINCommsStatus )
+        {
+            *commsStatus = (BYTE)abyResponsePacket[2];
+            return true;
+        }
+    }
+    return false;
+}
+
 bool setSpaceHeaterMode(BYTE spaceHeaterMode)
 {
 	abyCommandPacket[PAL_BYTE]=DDAPI_PAL_setSpaceHeaterMode;

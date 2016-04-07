@@ -94,6 +94,7 @@ static dwSet_t functionList[] =
 			{ "getLINProductID", &getLINProductID, getLINProductIDType, "Get the LIN Product ID", "Lin Product ID", "  Usage: --getLINProductID=<nodeAddress>, range 0-63" },
 			{ "getLINProductSN", &getLINProductSN, getLINProductSNType, "Get the LIN Product SN", "Lin Product SN", "  Usage: --getLINProductSN=<nodeAddress>, range 0-63" },
 			{ "assignFrameIDRange", &assignFrameIDRange, assignFrameIDRangeType, "assign Frame ID Range", "Frame ID Range", "  Usage: --assignFrameIDRange= XX XX XX XX XX XX" },
+            { "getLINCommsStatus", &getLINCommsStatus, boolFunctionPByteType, "Get State of LIN Communications", "LIN Communications Status", ""},
             { "setSpaceHeaterEnable", &setSpaceHeaterEnable, boolFunctionByteType, "Enable Space Heater", NULL, "Usage: --setSpaceHeaterEnable=1 to enable =0 to disable"},
             { "setSpaceHeaterMode", &setSpaceHeaterMode, boolFunctionByteType, "set SpaceHeater Mode", NULL, "Usage: --setSpaceHeaterMode=X range 0-8"},
             { "getSpaceHeaterBurnerStatus", &getSpaceHeaterBurnerStatus, boolFunctionPByteType, "Get State of Space Heater Burner", "Space Heater Burner Status", ""},

@@ -40,6 +40,7 @@ bool assignNAD( BYTE * inputString );
 bool conditionalChangeNAD( BYTE * inputString );
 bool dataDump( BYTE * inputData, BYTE * outputData );
 bool saveConfiguration ( BYTE NodeAddress );
+bool getLINCommsStatus ( BYTE * commsStatus );
 bool setSpaceHeaterEnable( BYTE spaceHeaterEnable );
 bool setSpaceHeaterMode ( BYTE spaceHeaterMode );
 bool getSpaceHeaterBurnerStatus ( BYTE * spaceHeaterStatus);

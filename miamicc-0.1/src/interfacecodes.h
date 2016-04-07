@@ -62,6 +62,7 @@
 #define DDAPI_PAL_conditionalChangeNAD                DDAPI_PACKET_ID + 0x08
 #define DDAPI_PAL_dataDump                            DDAPI_PACKET_ID + 0x08
 #define DDAPI_PAL_saveConfiguration                   DDAPI_PACKET_ID + 0x03
+#define DDAPI_PAL_getLINCommsStatus                   DDAPI_PACKET_ID + 0x02
 #define DDAPI_PAL_setSpaceHeaterEnable                DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_setSpaceHeaterMode                  DDAPI_PACKET_ID + 0x03
 #define DDAPI_PAL_getSpaceHeaterBurnerStatus          DDAPI_PACKET_ID + 0x02
@@ -189,6 +190,7 @@
 #define DDAPI_OPCODE_conditionalChangeNAD             0x07
 #define DDAPI_OPCODE_dataDump                         0x08
 #define DDAPI_OPCODE_saveConfiguration                0x09
+#define DDAPI_OPCODE_getLINCommsStatus                0x0a
 #define DDAPI_OPCODE_setSpaceHeaterMode               0x10
 #define DDAPI_OPCODE_getSpaceHeaterBurnerStatus       0x11
 #define DDAPI_OPCODE_getSpaceHeaterErrorStatus        0x12
@@ -318,6 +320,7 @@
 #define getLINProductID_PACKET_LENGTH                      0x07
 #define getLINProductSN_PACKET_LENGTH                      0x06
 #define dataDump_PACKET_LENGTH                             0x08
+#define getLINCommsStatus_PACKET_LENGTH					   0x02
 #define getSpaceHeaterBurnerStatus_PACKET_LENGTH           0x03
 #define getSpaceHeaterErrorStatus_PACKET_LENGTH            0x03
 #define getSpaceHeaterErrorCode_PACKET_LENGTH              0x03
@@ -394,6 +397,7 @@
 #define PTCM_PAL_getLINProductID                      PTCM_PACKET_ID + getLINProductID_PACKET_LENGTH
 #define PTCM_PAL_getLINProductSN                      PTCM_PACKET_ID + getLINProductSN_PACKET_LENGTH
 #define PTCM_PAL_dataDump                             PTCM_PACKET_ID + dataDump_PACKET_LENGTH
+#define PTCM_PAL_getLINCommsStatus					  PTCM_PACKET_ID + getLINCommsStatus_PACKET_LENGTH
 #define PTCM_PAL_getSpaceHeaterBurnerStatus           PTCM_PACKET_ID + getSpaceHeaterBurnerStatus_PACKET_LENGTH
 #define PTCM_PAL_getSpaceHeaterErrorStatus            PTCM_PACKET_ID + getSpaceHeaterErrorStatus_PACKET_LENGTH
 #define PTCM_PAL_getSpaceHeaterErrorCode              PTCM_PACKET_ID + getSpaceHeaterErrorCode_PACKET_LENGTH
@@ -467,6 +471,7 @@
 #define PTCM_RETCODE_getLINProductID                  0x03
 #define PTCM_RETCODE_getLINProductSN                  0x04
 #define PTCM_RETCODE_dataDump                         0x08
+#define PTCM_RETCODE_getLINCommsStatus				  0x0a
 #define PTCM_RETCODE_getSpaceHeaterBurnerStatus       0x11
 #define PTCM_RETCODE_getSpaceHeaterErrorStatus        0x12
 #define PTCM_RETCODE_getSpaceHeaterErrorCode          0x14
